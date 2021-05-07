@@ -48,6 +48,7 @@ void		bd_lstadd_back(t_bd_lst **lst, t_bd_lst *new)
 {
 	t_bd_lst	*tmp;
 
+
 	if (lst && *lst)
 	{
 		tmp = bd_lstlast(*lst);
@@ -55,8 +56,54 @@ void		bd_lstadd_back(t_bd_lst **lst, t_bd_lst *new)
 		tmp->next = new;
 	}
 	else
-	{
+	{	
 		*lst = new;
+	}
+}
+
+void		bd_lst_insert(t_bd_lst **cur, t_bd_lst *new)
+{
+	t_bd_lst *tmp;
+
+	if (cur != NULL)
+	{
+		tmp = *cur;
+		if (tmp == NULL)
+		{
+			bd_lstadd_front(cur, new);
+		}
+		else if (tmp->next == NULL)
+		{
+			bd_lstadd_back(cur, new);
+		}
+		else
+		{
+			new->next = tmp->next;
+			new->prev = tmp;
+			tmp->next->prev = new;
+			tmp->next = new;
+		}
+		bd_lstprint(*cur);
+	}
+}
+
+void		bd_lstpush_sort(t_bd_lst **lst, t_bd_lst *new, int (*comp)(t_bd_lst *, t_bd_lst *))
+{
+	t_bd_lst *tmp;
+
+	if (lst)
+	{
+		tmp = *lst;
+		while (tmp && tmp->next)
+		{
+			if (comp(tmp, new) < 0)
+			{
+				bd_lst_insert(&tmp, new);
+				return ;
+			}
+			tmp = tmp->next;
+		}
+		bd_lst_insert(&tmp, new);
 	}
 }
 
@@ -82,12 +129,11 @@ void		bd_lstclear(t_bd_lst **lst, void (*del)(void*))
 	if (lst && *lst && del)
 	{
 		last = bd_lstlast(*lst);
-		while (last != *lst && last != NULL)
+		while (last->prev != NULL)
 		{
-			last = last->prev;	
+			last = last->prev;
 			bd_lstdelone(lst, last->next, (*del));
 		}
-		bd_lstdelone(lst, last, (*del));
 		*lst = NULL;
 	}
 }
@@ -104,7 +150,7 @@ void		bd_lstiter(t_bd_lst *lst, void (*f)(void *))
 	}
 }
 
-static void	print_node(void *content)
+static void	node_print(void *content)
 {
 	if (content != NULL)
 	{
@@ -112,12 +158,17 @@ static void	print_node(void *content)
 	}
 }
 
-void		bd_lstprint(t_bd_lst *lst)
+void		*def_node_cont_copy(void *content)
 {
-	bd_lstiter(lst, print_node);
+	return ((void *)bd_strdup((char *)content));
 }
 
-t_bd_lst	*bd_lstcopy(t_bd_lst *list) //add copy content function as a second parameter
+void		bd_lstprint(t_bd_lst *lst)
+{
+	bd_lstiter(lst, node_print);
+}
+
+t_bd_lst	*bd_lstcopy(t_bd_lst *list, void *(*content_copy)(void *))
 {
 	t_bd_lst	*head;
 	t_bd_lst	*new;
@@ -125,7 +176,7 @@ t_bd_lst	*bd_lstcopy(t_bd_lst *list) //add copy content function as a second par
 	head = NULL;
 	while (list && list->content)
 	{
-		new = bd_lstnew(bd_strdup(list->content));
+		new = bd_lstnew(content_copy(list->content));
 		if (!new)
 		{
 			bd_lstclear(&head, free);
@@ -137,15 +188,52 @@ t_bd_lst	*bd_lstcopy(t_bd_lst *list) //add copy content function as a second par
 	return (head);
 }
 
-// t_bd_lst	*bd_lstmap(t_bd_lst *lst, void *(*f)(void *), void (*del)(void *))
-// {
-// }
+t_bd_lst	*bd_lstmap(t_bd_lst *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_bd_lst	*newlist;
+	t_bd_lst	*tmp;
 
-// int		bd_lstmax_cont_len(t_bd_lst *lst)
-// {
-// }
+	if (!f || !lst)
+		return (NULL);
+	newlist = malloc(bd_lstsize(lst) * sizeof(t_bd_lst));
+	if (!newlist)
+		return (NULL);
+	tmp = newlist;
+	while (lst)
+	{
+		if (tmp && lst->next)
+		{
+			tmp->content = f(lst->content);
+			tmp->next = bd_lstnew(NULL);
+			if (tmp->next == NULL)
+			{
+				bd_lstclear(&lst, del);
+				return (0);
+			}
+			lst = lst->next;
+			tmp = tmp->next;
+		}
+	}
+	return (newlist);
+}
 
-void	bd_lstsort(t_bd_lst *lst) // this is gonna be fun
+int		bd_lstmax_cont_len(t_bd_lst *lst)
+{
+	int	max;
+	int	curr;
+
+	max = 0;
+	while (lst)
+	{
+		curr = bd_strlen(lst->content);
+		if (curr < max)
+			max = curr;
+		lst = lst->next;
+	}
+	return (max);
+}
+
+void	bd_lstsort(t_bd_lst *lst) //rewrite using insert or add second method
 {
 	int			len;
 	t_bd_lst	*tmp;
