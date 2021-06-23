@@ -1,9 +1,9 @@
 #include "bidirectional_list.h"
 
-t_bd_lst	*bd_parse_from_arr(char **arr, void *(*copy)(void *))
+t_blst	*bd_parse_from_arr(char **arr, void *(*copy)(void *))
 {
-	t_bd_lst	*head;
-	t_bd_lst	*new;
+	t_blst	*head;
+	t_blst	*new;
 	int	i;
 
 	i = 0;
@@ -28,7 +28,7 @@ t_bd_lst	*bd_parse_from_arr(char **arr, void *(*copy)(void *))
 		return (NULL);
 }
 
-char		**bd_parse_to_arr(t_bd_lst *lst, void *(*copy)(void *))
+char		**bd_parse_to_arr(t_blst *lst, void *(*copy)(void *))
 {
 	char	**arr;
 	int		size;
@@ -38,14 +38,15 @@ char		**bd_parse_to_arr(t_bd_lst *lst, void *(*copy)(void *))
 	arr = NULL;
 	size = bd_lstsize(lst);
 	if (size != 0)
-		arr = malloc(sizeof(char *) * size);
+		arr = malloc(sizeof(char *) * (size + 1));
 	if (arr == NULL)
 		return (NULL);
 	while (i < size)
 	{
-		arr[i] = copy(lst->content);
+		arr[i] = copy(lst->data);
 		lst = lst->next;
 		i++;
 	}
+	arr[i] = NULL;
 	return (arr);		
 }

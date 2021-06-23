@@ -1,6 +1,6 @@
 #include "bidirectional_list.h"
 
-int			bd_lstmax_cont_len(t_bd_lst *lst)
+int			bd_lstmax_cont_len(t_blst *lst)
 {
 	int	max;
 	int	curr;
@@ -8,7 +8,7 @@ int			bd_lstmax_cont_len(t_bd_lst *lst)
 	max = 0;
 	while (lst)
 	{
-		curr = bd_strlen(lst->content);
+		curr = bd_strlen(lst->data);
 		if (curr < max)
 			max = curr;
 		lst = lst->next;

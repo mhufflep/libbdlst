@@ -1,14 +1,14 @@
 #include "bidirectional_list.h"
 
-t_bd_lst	*bd_lstnew(void *content)
+t_blst	*bd_lstnew(void *data)
 {
-	t_bd_lst	*new;
+	t_blst	*new;
 
-	new = malloc(sizeof(t_bd_lst));
+	new = malloc(sizeof(t_blst));
 	if (!new)
 		return (NULL);
 	new->next = NULL;
 	new->prev = NULL;
-	new->content = content;
+	new->data = data;
 	return (new);
 }
