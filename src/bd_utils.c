@@ -34,7 +34,6 @@ int	bd_memcmp(const void *s1, const void *s2, size_t n)
 		return (first[i] - second[i]);
 }
 
-
 char	*bd_strdup(const char *src)
 {
 	int		length;
