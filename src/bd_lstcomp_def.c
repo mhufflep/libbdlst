@@ -1,6 +1,6 @@
 #include "bidirectional_list.h"
 
-int			def_cont_comp(void *data1, void *data2)
+int	def_cont_comp(void *data1, void *data2)
 {
 	if (data1 && !data2)
 		return (1);

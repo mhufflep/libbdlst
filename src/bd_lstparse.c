@@ -4,7 +4,7 @@ t_blst	*bd_parse_from_arr(char **arr, void *(*copy)(void *))
 {
 	t_blst	*head;
 	t_blst	*new;
-	int	i;
+	int		i;
 
 	i = 0;
 	head = NULL;
@@ -28,7 +28,7 @@ t_blst	*bd_parse_from_arr(char **arr, void *(*copy)(void *))
 		return (NULL);
 }
 
-char		**bd_parse_to_arr(t_blst *lst, void *(*copy)(void *))
+char	**bd_parse_to_arr(t_blst *lst, void *(*copy)(void *))
 {
 	char	**arr;
 	int		size;
@@ -48,5 +48,5 @@ char		**bd_parse_to_arr(t_blst *lst, void *(*copy)(void *))
 		i++;
 	}
 	arr[i] = NULL;
-	return (arr);		
+	return (arr);
 }

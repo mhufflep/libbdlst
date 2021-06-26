@@ -1,11 +1,13 @@
 #include "bidirectional_list.h"
 
-void		bd_lstsort(t_blst *lst) //not working well, need to know bad cases
+// not working well, need to know bad cases
+void	bd_lstsort(t_blst *lst)
 {
 	int			len;
-	t_blst	*tmp;
+	t_blst		*tmp;
 	int			sorted;
 	char		*str;
+
 	sorted = 0;
 	while (!sorted)
 	{
