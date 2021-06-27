@@ -20,6 +20,7 @@ void	node_print(void *data);
 void	bd_lstinsert(t_blst **cur, t_blst *new);
 t_blst	*bd_lstfind(t_blst *lst, void *data, int size, int (*comp)());
 
+void	bd_lstswap(t_blst *l1, t_blst *l2);
 void	bd_lstdelone(t_blst *lst, void (*del)(void*));
 void	bd_lstclear(t_blst **lst, void (*del)(void *));
 void	bd_lstremove(t_blst **head, t_blst *cur, void (*del)(void *));
