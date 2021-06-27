@@ -18,6 +18,7 @@ SRCS	=	bd_utils.c \
 			bd_lstfind.c \
 			bd_lstsize.c \
 			bd_lstsort.c \
+			bd_lstswap.c \
 			bd_lstclear.c \
 			bd_lstmerge.c \
 			bd_lstparse.c \
