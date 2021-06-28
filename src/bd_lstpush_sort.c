@@ -16,11 +16,6 @@ void	bd_lstpush_sort(t_blst **lst, t_blst *new, \
 
 	if (lst == NULL)
 		return ;
-	if (*lst == NULL)
-	{
-		bd_lstadd_back(lst, new);
-		return ;
-	}
 	tmp = *lst;
 	while (tmp)
 	{
@@ -31,5 +26,10 @@ void	bd_lstpush_sort(t_blst **lst, t_blst *new, \
 			break ;
 		}
 		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+	{
+		bd_lstadd_back(lst, new);
+		return ;
 	}
 }
