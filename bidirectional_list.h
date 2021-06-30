@@ -14,6 +14,7 @@ typedef struct s_bd_lst
 size_t	bd_strlen(const char *s);
 int		bd_memcmp(const void *s1, const void *s2, size_t n);
 char	*bd_strdup(const char *src);
+int		bd_lstcmp(t_blst *a, t_blst *b, int (*comp)());
 int		bd_strcmp(const char *s1, const char *s2);
 void	node_print(void *data);
 
@@ -28,11 +29,12 @@ void	bd_lstrelink(t_blst *n1, t_blst *n2, t_blst *new);
 
 t_blst	*bd_lstnew(void *data);
 t_blst	*bd_lstlast(t_blst *lst);
+t_blst	*bd_lstmin(t_blst *lst, int (*comp)());
+t_blst	*bd_lstmax(t_blst *lst, int (*comp)());
 int		bd_lstsize(t_blst *lst);
 void	bd_lstadd_front(t_blst **lst, t_blst *new);
 void	bd_lstadd_back(t_blst **lst, t_blst *new);
-void	bd_lstpush_sort(t_blst **lst, t_blst *new, \
-				int (*comp)(t_blst *, t_blst *));
+void	bd_lstpush_sort(t_blst **lst, t_blst *new, int (*comp)());
 
 void	bd_lstiter(t_blst *lst, void (*f)(void *));
 void	*def_cont_copy(void *data);

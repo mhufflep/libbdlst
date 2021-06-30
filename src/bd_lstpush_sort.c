@@ -9,8 +9,7 @@ void	bd_lstrelink(t_blst *n1, t_blst *n2, t_blst *new)
 		n2->prev = new;
 }
 
-void	bd_lstpush_sort(t_blst **lst, t_blst *new, \
-					int (*comp)(t_blst *, t_blst *))
+void	bd_lstpush_sort(t_blst **lst, t_blst *new, int (*comp)())
 {
 	t_blst	*tmp;
 
@@ -19,7 +18,7 @@ void	bd_lstpush_sort(t_blst **lst, t_blst *new, \
 	tmp = *lst;
 	while (tmp)
 	{
-		if (comp(tmp, new) > 0)
+		if (bd_lstcmp(tmp, new, comp) > 0)
 		{
 			bd_lstrelink(tmp, tmp->next, new);
 			bd_lstswap(tmp, new);
