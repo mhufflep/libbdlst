@@ -10,7 +10,10 @@ OBJ_DIR = obj
 SRC_DIR = src
 
 SRCS	=	bd_utils.c \
+			bd_lstcmp.c \
 			bd_lstmap.c \
+			bd_lstmin.c \
+			bd_lstmax.c \
 			bd_lstnew.c \
 			bd_lstcopy.c \
 			bd_lstiter.c \
@@ -25,7 +28,6 @@ SRCS	=	bd_utils.c \
 			bd_lstprint.c \
 			bd_lstremove.c \
 			bd_lst_maxlen.c \
-			bd_lstcomp_def.c \
 			bd_lstadd_back.c \
 			bd_lstadd_front.c \
 			bd_lstpush_sort.c \
