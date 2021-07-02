@@ -15,6 +15,7 @@ SRCS	=	bd_utils.c \
 			bd_lstmin.c \
 			bd_lstmax.c \
 			bd_lstnew.c \
+			bd_lstdup.c \
 			bd_lstcopy.c \
 			bd_lstiter.c \
 			bd_lstlast.c \
