@@ -27,6 +27,7 @@ void	bd_lstclear(t_blst **lst, void (*del)(void *));
 void	bd_lstremove(t_blst **head, t_blst *cur, void (*del)(void *));
 void	bd_lstrelink(t_blst *n1, t_blst *n2, t_blst *new);
 
+t_blst	*bd_lstdup(t_blst *lst, int datasize);
 t_blst	*bd_lstnew(void *data);
 t_blst	*bd_lstlast(t_blst *lst);
 t_blst	*bd_lstmin(t_blst *lst, int (*comp)());
