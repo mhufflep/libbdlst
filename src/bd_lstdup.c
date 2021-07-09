@@ -1,5 +1,6 @@
-static void *
-bd_memmove(void *dst, const void *src, size_t n)
+#include "bidirectional_list.h"
+
+static void *bd_memmove(void *dst, const void *src, size_t n)
 {
     if (dst == NULL && src == NULL)
         return (0);
@@ -8,8 +9,7 @@ bd_memmove(void *dst, const void *src, size_t n)
     return (dst);
 }
 
-t_blst *
-bd_lstdup(t_blst *lst, int datasize)
+t_blst *bd_lstdup(t_blst *lst, int datasize)
 {
     t_blst  *new;
     void    *new_data;
