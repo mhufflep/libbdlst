@@ -7,16 +7,8 @@ t_blst	*bd_lstmax(t_blst *lst, int (*comp)())
 	max = lst;
 	while (lst)
 	{
-		if (lst->next)
-		{
-			if (bd_lstcmp(max, lst->next, comp) < 0)
-				max = lst;
-		}
-		else
-		{
-			if (bd_lstcmp(max, lst, comp) < 0)
-				max = lst;
-		}
+		if (bd_lstcmp(max, lst, comp) < 0)
+			max = lst;
 		lst = lst->next;
 	}
 	return (max);
